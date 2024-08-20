@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: pod-clone
+  name: pod-clone
+spec:
+  containers:
+  - image: nginx
+    name: pod-clone

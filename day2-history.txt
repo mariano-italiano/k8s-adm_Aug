@@ -1,0 +1,279 @@
+kubectl get nodes
+kubectl -n kube-system exec -it etcd-master -- sh -c "ETCDCTL_API=3 \
+_CACERT=/etc/kubernetes/pki/etcd/ca.crt \
+_CERT=/etc/kubernetes/pki/etcd/server.crt \
+_KEY=/etc/kubernetes/pki/etcd/server.key \
+ --endpoints=https://127.0.0.1:2379 member list -w table"
+kubectl get pods -A
+kubectl -n kube-system exec -it etcd-k8s-master -- sh -c "ETCDCTL_API=3 \
+_CACERT=/etc/kubernetes/pki/etcd/ca.crt \
+_CERT=/etc/kubernetes/pki/etcd/server.crt \
+_KEY=/etc/kubernetes/pki/etcd/server.key \
+ --endpoints=https://127.0.0.1:2379 member list -w table"
+kubectl run pod1 --image nginx
+kubectl get pods
+kubectl run pod1 --image nginx
+kubectl get pods
+kubectl -n kube-system exec -it etcd-k8s-master -- sh -c "ETCDCTL_API=3 \
+_CACERT=/etc/kubernetes/pki/etcd/ca.crt \
+_CERT=/etc/kubernetes/pki/etcd/server.crt \
+_KEY=/etc/kubernetes/pki/etcd/server.key \
+ --endpoints=https://127.0.0.1:2379 snapshot save /var/lib/snapshot.db"
+kubectl get pods
+kubectl delet pod pod1
+kubectl delete pod pod1
+kubectl get pods
+cd /var/lib/etcd/
+sudo cd /var/lib/etcd/
+sudo -i 
+kubectl -n kube-system exec -it etcd-k8s-master -- 
+kubectl -n kube-system exec -it etcd-k8s-master -- sh
+kubectl cp --help
+kubectl cp etcd-k8s-master:/var/lib/snapshot.db /var/lib/
+kubectl -n kube-system cp etcd-k8s-master:/var/lib/snapshot.db /var/lib/
+kubectl cp kube-system/etcd-k8s-master:/var/lib/snapshot.db /var/lib/
+sudo apt-get install etcdctl -y
+sudo apt-get install etcd-client
+ETCDCTL_API=3 ETCDCTL_CACERT=/etc/kubernetes/pki/etcd/ca.crt ETCDCTL_CERT=/etc/kubernetes/pki/etcd/server.crt ETCDCTL_KEY=/etc/kubernetes/pki/etcd/server.key etcdctl --endpoints=https://127.0.0.1:2379 member list -w table
+sudo -i
+kubectl get pods
+kubectl run pod1 --image nginx
+kubectl get pods
+crictl 
+crictl ps
+sudo crictl ps
+rm -rf /var/lib/etcd/
+sudo rm -rf /var/lib/etcd/
+kubectl get nodes
+kubectl get pods -A
+kubectl get nodes
+kubectl get pods -A
+kubectl get nodes
+kubectl get pods -A
+sudo crictl ps
+kubectl get nodes
+kubectl get pods -A
+kubectl get nodes
+sudo ls -la /var/lib/etcd/
+sudo -i
+kubectl get pods -A
+kubectl get nodes
+sudo crictl ps
+sudo ls -la /var/lib/etcd/
+kubectl get nodes
+kubectl get pods -A
+sudo crictl ps
+sudo -i
+kubectl get pods -A
+kubectl get nodes
+sudo crictl ps
+kubectl get nodes
+kubectl get pods -A
+ls -la /var/lib/etcd/member/m
+sudo ls -la /var/lib/etcd/member/
+sudo -i
+kubectl get nodes
+kubectl get pods -A
+kubectl get pods
+kubectl get pods -A
+kubectl get nodes
+kubectl create deployment my-depl --image=nginx 
+kubectl get pods
+kubectl delete deployments.apps my-depl 
+cd k8s-adm_Aug/
+mkdir day2
+cd day2
+vi first-pod.yaml
+kubectl apply -f first-pod.yaml
+kubectl get pods
+kubectl get pods -o wide
+vi mk-pod.yaml
+kubectl apply -f mk-pod.yaml
+kubectl get pods
+kubectl get pods -o wide
+kubectl describe pod mk-pod 
+kubectl get pod mk-pod -o yaml
+kubectl run pod-clone --image nginx -o yaml --dry-run=client
+kubectl run pod-clone --image nginx -o yaml --dry-run=client > pod-clone.yaml
+vi pod-clone.yaml
+kubectl apply -f pod-clone.yaml
+kubectl get pods
+kubectl get pod --selector app
+kubectl get pod --selector app=mk
+kubectl get pod --selector run
+kubectl get pod --help
+kubectl get pod --selector app!=mk
+kubectl api-resources 
+kubectl api-resources | grep -i daemonset
+vi my-pod.yaml
+kubectl apply -f my-pod.yaml
+kubec get pods
+kubectl get pods
+kubectl exec -it my-pod -- bash
+kubectl exec -it my-pod -- sh
+history
+history | awk '$1 > 88' | cut -c 8- > ../day2-history.txt
+vi ~/.kube/config 
+echo "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURCVENDQWUyZ0F3SUJBZ0lJQkZ0MkhoUTJjZFF3RFFZSktvWklodmNOQVFFTEJRQXdGVEVUTUJFR0ExVUUKQXhNS2EzVmlaWEp1WlhSbGN6QWVGdzB5TkRBNE1Ua3dPVFUyTWpSYUZ3MHpOREE0TVRjeE1EQXhNalJhTUJVeApFekFSQmdOVkJBTVRDbXQxWW1WeWJtVjBaWE13Z2dFaU1BMEdDU3FHU0liM0RRRUJBUVVBQTRJQkR3QXdnZ0VLCkFvSUJBUUR6djRSVHlmbW5WSFVRTGNWTWpyTGNYZ0JWNzNaai9Ob3BNdFhReXFWa0sxTDVaUEYzdU1sb1FJVEsKVURreFg4b01uTENCWHFDbUhYZnVzQVl3KzlTYkQzNDR0UVBhdnd1cXl6SnZjZzBnZWpGVkMxaWxwZThZejVPVQpTd3hRRHJRbnlHWW5Jd3diL2RIT0lqYW90Mi9nZlZaTDZEdWxrQ0IvZDUvS2ZTNDl3QzRPenlxREtIbG04ZzIwClRKSUVHZFV3eUpGcWRyQUhIeE1lWXJzZHRYbnR3OWZOK3BQWGdyTi9mSys2Ti9XZ1JuL1p4NUtnVFJVa1psUFgKSGU2WWRsRVVwMkRmTjVKUHQ0WnFxTTZDRUFRNzhVR2Q0RkhqZTczelMyMFl4Z05kSGx6c1JKa3JNT2I5aXF0bwp6TUR4SHNmZG1IR3R0MzF2ekV5aXpMWHkvWUdGQWdNQkFBR2pXVEJYTUE0R0ExVWREd0VCL3dRRUF3SUNwREFQCkJnTlZIUk1CQWY4RUJUQURBUUgvTUIwR0ExVWREZ1FXQkJTWmRtV3BEUWJSemtTU3JNWjgyRlBsRWZjRDlUQVYKQmdOVkhSRUVEakFNZ2dwcmRXSmxjbTVsZEdWek1BMEdDU3FHU0liM0RRRUJDd1VBQTRJQkFRQURrQmxJSzYxZgphWUd3UzJ0NU1EdUNyUjRjdlJWL05nMzZPSlZTR2Z4T0hPTTFPazRCK1NjeFZnYjRYM0lWaGpURW9pK1FzUzQ4CnVGLzZFVzN5akhhYjdEZTNvTklsbUo5QVVlb2VuNUp3OFdCZ3ExL0pLS0F6ZWlKd2dneEZBazdxcytWQXk4TGMKZ25YL2pVYnJveEt1SitiMzNaclBXYS91b3JCVHhBWWdqSTJrVXlpZ0lnOHpJS2hMMGZGWkxRSnM2RTZWeHBURApQZVJDcUV4aWh1aHFLSmpDM2RQR0ZPeEhIRlJkNW9aM1RIZG5rWmpmd1RBVVNaNzdlNndhUXJHZUF1Q0FuQXpYCkFYUi8wS1piQVlIRmV1aWZpZk1sMzNLeHBkTWZqMHRGb2lrN1R1Vy9TVjNmV2lRYWoyKzJKQ2lTOEVqRHI1Y28KL3ZQclZrNjFKVDZYCi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K" | base64 -d
+vi ~/.kube/config 
+openssl genrsa -out devops.key
+openssl req -new -key devops.key -out devops.csr -subj "/CN=devops"
+ls -la devops.
+ls -la devops.*
+cat devops.csr
+cat devops.csr | base64 | tr -d '\n'
+vi user-request-devops.yaml
+kubectl apply -f user-request-devops.yaml
+kubectl get csr
+kubectl certificate approve user-request-devops
+kubectl get csr
+kubectl get csr user-request-devops -o yaml
+echo "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURCekNDQWUrZ0F3SUJBZ0lSQU0vdDNwT09uZVJYaVFFRElPN2dyWTB3RFFZSktvWklodmNOQVFFTEJRQXcKRlRFVE1CRUdBMVVFQXhNS2EzVmlaWEp1WlhSbGN6QWVGdzB5TkRBNE1qQXhNRFExTVRKYUZ3MHlOVEE0TWpBeApNRFExTVRKYU1CRXhEekFOQmdOVkJBTVRCbVJsZG05d2N6Q0NBU0l3RFFZSktvWklodmNOQVFFQkJRQURnZ0VQCkFEQ0NBUW9DZ2dFQkFMdXV2dFZCMHhyamQ3NVBObnV2TSt1NU9Gd1hhWk9WRGNXczZla1hLSiszRDlYN2R1cEEKY2F3eGF3SU1FUHBJR25hUG92dTY5VVh6WVhMYXowcFpRM3BuQnlSNHNQNHNPYnVNcjVqOEd6UGFNZTlDQnlWWApqWXpCbXdYRVpUYTJVVm1waWRlZlpaU0FPbDQ5cEJZdjFSWDBIWVpDV2NiQ0E3TCtCZk9PNitBT29oaUdBNU11CnlnVTdiM3ZhRndhaHIxRkhNTDZZbGU5cjVXTG93aENHQnZJSUR5S25UVnNJc252Y04yT1VoZzZ6U3R4azhWUDkKei9aMEtPQmFqL1ByRnlyU3VXdTVuU3MrcHVqZFhrSFowUXhFTUp4ZUlOOWFNa25kSnUyRW1YamFmUXB2Nzc4bgpkM0c0d094cjk2M1VxZUkzSEd6b0RFaWlmTC8xRE5YNVZ2MENBd0VBQWFOV01GUXdEZ1lEVlIwUEFRSC9CQVFECkFnV2dNQk1HQTFVZEpRUU1NQW9HQ0NzR0FRVUZCd01DTUF3R0ExVWRFd0VCL3dRQ01BQXdId1lEVlIwakJCZ3cKRm9BVW1YWmxxUTBHMGM1RWtxekdmTmhUNVJIM0EvVXdEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBRVBTcDVILwpuOGJzMDdqNUIrVjJHd1UwU3dIdi8zcVdJQVNSK04vV0NST0VNYlo5YlY1d0dEaldqck1lOWdBbFNDbXRGWWJNCnkvU1RzYy9kVnJGRTFqb3owV2YxcXFGemxPd3BWTlo2NHJvcXdzeGZLZzdzTW5uamhacXMyMVZ3b2tSdmN1SzUKeXVnVEhjQVRMMGZjQm9PTzduMG9mczdMVCtvUisrNnJ1WXkzNUhsN1A3WkJZRUIzaTlqQkFtbTFDQ3JmMnNJRwphVWRlNGxPc2RzNUtzRHRmY0NmcFlENjJYR3hEYjZrUHpXRkZ1dXBETy9MSWlDb3llcW1vMEkzcDJaUW5jaTRkCnNvZ0NWVEVPbUhBc0kzczZnd1hqa3NvTnZFZUt4bEN5akVIYSt6S2NvUUYrQU5lMDR5SXJFZ0p4ZG53SWNRZmQKVllZbkg0QXhRbGN3TWpjPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==" | base64 -d > devops.crt
+cat devops.crt
+kubectl --kubeconfig config-devops config set-cluster --insecure-skip-tls-verify --server https://192.168.1.100:6443
+kubectl --kubeconfig config-devops config set-cluster --insecure-skip-tls-verify=true --server https://192.168.1.100:6443
+kubectl --kubeconfig config-devops config set-cluster k8s-master --insecure-skip-tls-verify=true --server https://192.168.1.100:6443
+vi config-devops 
+kubectl --kubeconfig config-devops config set-credentials devops --client-certificate devops.crt --client-key devops.key --embed-certs=true
+vi config-devops 
+kubectl --kubeconfig config-devops config set-context default --cluster k8s-master --user devops
+vi config-devops 
+vi ~/.kube/config 
+vi config-devops 
+vi ~/.kube/config 
+kubectl create ns development
+kubectl -n development create role dev-role --help
+kubectl -n development create role dev-role --verb=get,list,watch --resource=pods,configmaps 
+kubectl -n development create rolebinding --help
+kubectl -n development create rolebinding dev-rolebinding --role=dev-role --user=devops
+sudo useradd devops -s /bin/bash -m 
+cat /etc/passwd
+pwd
+sudo -i
+kubectl edit -n development role dev-role 
+sudo -i
+kubectl auth can-i --help
+kubectl create role --help
+kubectl get pods
+vi sidecar-pod.yaml
+kubectl apply -f sidecar-pod.yaml
+kubectl get pods
+kubectl exec -it sidecar-pod 
+kubectl exec -it sidecar-pod -- sh
+kubectl exec -it sidecar-pod -c sidecar -- sh
+kubectl logs sidecar-pod
+kubectl logs sidecar-pod --all-containers 
+kubectl logs first-pod 
+kubectl exec -it first-pod -- bash
+vi init-pod.yaml
+kubectl apply -f init-pod.yaml
+watch -n1 kubectl get pods\
+watch -n1 kubectl get pods
+kubectl logs init-pod -c delay
+kubectl logs init-pod -c nginx
+vi init-pod.yaml 
+kubectl replace -f init-pod.yaml
+q
+vi init-pod.yaml 
+kubectl delete pod init-pod 
+kubectl apply -f init-pod.yaml
+watch -n1 kubectl get pods
+kubectl logs init-pod -c delay
+kubectl logs init-pod --all-containers 
+vi init-pod-web.yaml
+kubectl apply -f init-pod-web.yaml
+kubectl get pod
+vi init-pod-svc.yaml
+vi init-pod-web-svc.yaml
+vi init-pod-web.yaml
+kubectl apply -f init-pod-web.yaml
+kubectl describe pod init-pod-web 
+vi init-pod-web-svc.yaml
+watch -n1 kubectl get pods
+kubectl apply -f init-pod-web-svc.yaml
+watch -n1 kubectl get pods
+vi init-pod-web.yaml 
+kubectl exec -it init-pod-web -- bash
+kubectl exec -it init-pod-web -c prepare -- bash 
+kubectl exec -it init-pod-web -c prepare -- sh
+kubectl delete svc nginx-service 
+kubectl delete pod init-pod-web 
+vi init-pod-web.yaml 
+kubectl get pods -a
+kubectl get pods -A -o wide
+kubectl get pods
+kubectl apply -f init-pod-web.yaml 
+kubectl get pods
+vi init-pod-web-svc.yaml 
+kubectl apply -f init-pod-web-svc.yaml
+kubectl get pods
+watch -n1 kubectl get pods
+kubectl logs init-pod-web
+kubectl logs init-pod-web -c svc-check
+kubectl get svc -o wide
+watch -n1 kubectl get pods
+vi custom-web.yaml
+cp -rp first-pod.yaml custom-web.yaml
+vi custom-web.yaml
+kubectl apply -f custom-web.yaml
+kubectl get pods -o wide
+kubectl get pods
+kubectl get pod static-pod-worker01 -o yaml
+kubectl describe pod static-pod-worker01 
+kubectl describe pod init-pod
+kubectl get pods 
+kubectl delete pod static-pod-worker01 
+kubectl get pods 
+kubectl get pods 
+kubectl describe pod my-pod
+kubectl annotate pod my-pod version='1.0'
+kubectl annotate pod my-pod env='test'
+kubectl annotate pod my-pod updatedAt='20.08.2024'
+kubectl describe pod my-pod
+kubectl annotate pod my-pod version='2.0'
+kubectl annotate pod my-pod version='2.0' --overwrite
+kubectl describe pod my-pod
+kubectl annotate pod my-pod updatedAt- 
+kubectl describe pod my-pod
+kubectl annotate pod my-pod updatedAt- 
+kubectl describe pod my-pod
+kubectl edit pod my-pod
+kubectl describe pod my-pod
+kubectl get pods
+kubectl get pods --show-labels 
+kubectl get pods --show-labels -A
+kubectl get pods -A -l 'component in (etcd)'
+kubectl get pods -A -l 'component in (kube-apiserver)'
+kubectl get pods --show-labels -A
+kubectl get pods -A -l 'component in (kube-apiserver)'
+kubectl get pods -A -l 'component notin (etcd),tier in (control-plane)'
+kubectl get pods -A -l app
+kubectl exec -it my-pod -- sh
+kubectl get pods -o wide
+kubectl exec -it my-pod -- sh
+kubectl delete pod mk-pod; kubectl apply -f mk-pod.yaml 
+kubectl get pods -o wide
+kubectl expose pod first-pod --name svc-clusterip --port 80 
+kubectl get svc
+kubectl get svc,ep,pod -o wide
+kubectl get svc,ep,pod -o wide --show-labels 
+kubectl edit pod custom-web
+kubectl get svc,ep,pod -o wide --show-labels 
+curl 10.103.115.68
+kubectl expose pod first-pod --name svc-nodeport --port 80
+kubectl get svc,ep,pod -o wide 
+kubectl delete svc svc-nodeport
+kubectl expose pod first-pod --name svc-nodeport --port 80 --type=NodePort
+kubectl get svc,ep,pod -o wide 
+kubectl expose pod first-pod --name svc-loadbalancer --port 80 --type=LoadBalancer
+kubectl get svc,ep,pod -o wide 
+kubectl edit svc svc-loadbalancer 
+kubectl get svc,ep,pod -o wide 
+kubectl edit svc svc-loadbalancer 
+kubectl get svc,ep,pod -o wide 
+kubectl edit svc svc-loadbalancer 
+kubectl get svc,ep,pod -o wide 
+kubectl edit svc svc-loadbalancer 
+git status
+git add .
+history | awk '$1 > 88' | cut -c 8- > ../day2-history.txt

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: mk-pod
+  labels:
+    app: mk
+spec:
+  containers:
+  - name: python-app
+    image: marcinkujawski/python-api:1.0
+    
