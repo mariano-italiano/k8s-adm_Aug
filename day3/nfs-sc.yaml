@@ -1,0 +1,10 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: nfs-sc
+provisioner: example.com/external-nfs
+allowVolumeExpansion: true
+parameters:
+  server: 192.168.1.100
+  path: /var/nfs/data1
+  readOnly: "false"

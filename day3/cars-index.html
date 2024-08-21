@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cars Showcase</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #000428, #004e92);
+            color: white;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            padding: 20px;
+            background-color: #ff4b2b;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin: 0;
+            color: #fff;
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .car {
+            background: white;
+            margin: 15px;
+            border-radius: 15px;
+            overflow: hidden;
+            width: 300px;
+            transition: transform 0.3s ease;
+        }
+
+        .car:hover {
+            transform: scale(1.05);
+        }
+
+        .car img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .car-info {
+            padding: 15px;
+            background-color: #ff9068;
+            color: #333;
+        }
+
+        .car-info h2 {
+            margin: 0;
+        }
+
+        .car-info p {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Cars Showcase</h1>
+    </header>
+
+    <div class="gallery">
+        <div class="car">
+            <img src="https://via.placeholder.com/300x200?text=Car+1" alt="Car 1">
+            <div class="car-info">
+                <h2>Car Model 1</h2>
+                <p>Luxury, Speed, Comfort</p>
+            </div>
+        </div>
+        <div class="car">
+            <img src="https://via.placeholder.com/300x200?text=Car+2" alt="Car 2">
+            <div class="car-info">
+                <h2>Car Model 2</h2>
+                <p>Power, Performance, Style</p>
+            </div>
+        </div>
+        <div class="car">
+            <img src="https://via.placeholder.com/300x200?text=Car+3" alt="Car 3">
+            <div class="car-info">
+                <h2>Car Model 3</h2>
+                <p>Innovation, Technology, Design</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flowers Garden</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            color: white;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            padding: 20px;
+            background-color: #ff6f61;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin: 0;
+            color: #fff;
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .flower {
+            background: white;
+            margin: 15px;
+            border-radius: 15px;
+            overflow: hidden;
+            width: 300px;
+            transition: transform 0.3s ease;
+        }
+
+        .flower:hover {
+            transform: scale(1.05);
+        }
+
+        .flower img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .flower-info {
+            padding: 15px;
+            background-color: #ffb88c;
+            color: #333;
+        }
+
+        .flower-info h2 {
+            margin: 0;
+        }
+
+        .flower-info p {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Flowers Garden</h1>
+    </header>
+
+    <div class="gallery">
+        <div class="flower">
+            <img src="https://via.placeholder.com/300x200?text=Flower+1" alt="Flower 1">
+            <div class="flower-info">
+                <h2>Flower Type 1</h2>
+                <p>Beauty, Fragrance, Elegance</p>
+            </div>
+        </div>
+        <div class="flower">
+            <img src="https://via.placeholder.com/300x200?text=Flower+2" alt="Flower 2">
+            <div class="flower-info">
+                <h2>Flower Type 2</h2>
+                <p>Grace, Charm, Radiance</p>
+            </div>
+        </div>
+        <div class="flower">
+            <img src="https://via.placeholder.com/300x200?text=Flower+3" alt="Flower 3">
+            <div class="flower-info">
+                <h2>Flower Type 3</h2>
+                <p>Delicate, Pure, Colorful</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

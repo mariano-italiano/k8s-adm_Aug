@@ -1,0 +1,272 @@
+kubectl get nodes
+cd k8s-adm_Aug/
+mkdir day3
+cd day3
+vi replica-set.yaml
+kubectl apply -f replica-set.yaml
+kubectl get rs,pod
+kubectl delete -f replica-set.yaml
+cp ../day2/first-pod.yaml fake-rs-pod.yaml
+vi fake-rs-pod.yaml
+kubectl apply -f fake-rs-pod.yaml
+kubectl delete -f fake-rs-pod.yaml
+vi fake-rs-pod.yaml
+kubectl apply -f fake-rs-pod.yaml
+kubectl get pods --show-labels 
+kubectl apply -f replica-set.yaml
+kubectl get pods --show-labels 
+cp -rp fake-rs-pod.yaml fake2-rs-pod.yaml 
+vi fake2-rs-pod.yaml
+kubectl apply -f fake2-rs-pod.yaml
+kubectl get pods --show-labels 
+kubectl events 
+kubectl describe rs replica-set 
+kubectl scale rs replica-set --replicas 10
+kubectl get pods --show-labels 
+kubectl scale rs replica-set --replicas 1
+kubectl get pods --show-labels 
+vi nginx-deployment.yaml
+kubectl apply -f nginx-deployment.yaml
+kubectl get deploy,rs,pod
+kubectl get pods
+kubectl describe deployments.apps nginx-deployment 
+kubectl edit deployments.apps nginx-deployment 
+kubectl scale deployment nginx-deployment --replicas 5 --record 
+kubectl describe deployments.apps nginx-deployment 
+vi nginx-deployment.yaml 
+kubectl set image deployments nginx-deployment nginx=nginx:1.19.2
+kubectl rollout status deployment nginx-deployment 
+kubectl describe deployments.apps nginx-deployment 
+kubectl annotate deployments.apps nginx-deployment kubernetes.io/change-cause="updated nginx image from 1.14.2 to 1.19.2"
+kubectl describe deployments.apps nginx-deployment 
+kubectl rollout history deployment nginx-deployment 
+kubectl edit deployments.apps nginx-deployment 
+kubectl rollout status deployment nginx-deployment 
+kubectl get pods
+kubectl rollout history deployment nginx-deployment 
+kubectl rollout undo deployment nginx-deployment --to-revision 2
+watch -n1 kubectl get pods
+kubectl rollout history deployment nginx-deployment 
+kubectl events
+kubectl rollout history deployment nginx-deployment 
+kubectl edit deployments.apps nginx-deployment 
+kubectl describe deployments.apps nginx-deployment 
+kubectl set image deployments nginx-deployment nginx=nginx:1.16.1
+kubectl describe deployments.apps nginx-deployment 
+kubectl rollout history deployment nginx-deployment 
+kubectl annotate deployments.apps nginx-deployment kubernetes.io/change-cause=updated to version 1.16.1
+kubectl annotate deployments.apps nginx-deployment kubernetes.io/change-cause="updated to version 1.16.1"
+kubectl rollout history deployment nginx-deployment 
+vi my-daemonset.yaml
+kubectl apply -f my-daemonset.yaml
+kubectl get ds,pod -o wide
+kubectl get nodes --show-labels 
+kubectl get nodes master
+kubectl describe node master
+kubectl get nodes k8s-master 
+kubectl describe node master
+kubectl describe node k8s-master
+kubectl get ds,pod -o wide
+vi web-sts.yaml
+kubectl apply -f web-sts.yaml
+kubectl get sts,pod
+kubectl delete -f web-sts.yaml 
+vi nginx-sts.yaml
+kubectl apply -f nginx-sts.yaml
+kubectl get sts,pod
+kubectl scale sts nginx-sts --replicas 8
+watch -n1 kubectl get sts,pod
+kubectl scale sts nginx-sts --replicas 2
+watch -n1 kubectl get sts,pod
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.0.0/deploy/static/provider/baremetal/deploy.yaml
+kubectl get all -n ingress-nginx
+watch-n1 kubectl get all -n ingress-nginx
+watch -n1 kubectl get all -n ingress-nginx
+kubectl edit svc -n ingress-nginx ingress-nginx-controller
+watch -n1 kubectl get all -n ingress-nginx
+kubectl create deployment cars --image nginx --replicas 1 -o yaml --dry-run=client
+kubectl create deployment cars --image nginx --replicas 1 -o yaml --dry-run=client > cars.yaml
+vi cars.yaml\
+vi cars.yaml
+kubectl create deployment cars --image nginx --replicas 1
+kubectl create deployment flowers --image nginx --replicas 1
+kubectl expose deployment cars --name cars-svc --port 80
+kubectl expose deployment flowers --name flowers-svc --port 80
+kubectl get deplyo,svc
+kubectl get deploy,svc
+kubectl get pod
+vi cars-index.html
+vi flowers-index.html
+kubectl cp --help
+kubectl cp cars-77fbf6b8b-xtvk2:/usr/share/nginx/html/ cars-index.html
+kubectl cp cars-77fbf6b8b-xtvk2:/usr/share/nginx/html cars-index.html
+kubectl exec -it cars-77fbf6b8b-xtvk2 -- bash
+kubectl cp cars-index.html cars-77fbf6b8b-xtvk2:/usr/share/nginx/html/
+kubectl cp flowers-index.html flowers-74684c7959-8fggb:/usr/share/nginx/html/
+kubectl get pods -o wide
+kubectl cp flowers-index.html flowers-74684c7959-8fggb:/usr/share/nginx/html/index.html
+kubectl cp cars-index.html cars-77fbf6b8b-xtvk2:/usr/share/nginx/html/index.html
+vi web-ingress.yaml
+kubectl get ingressclasses.networking.k8s.io 
+vi web-ingress.yaml
+kubectl apply -f web-ingress.yaml
+kubectl get ingress web-ingress 
+kubectl exec -it flowers-74684c7959-8fggb -- bash
+kubectl edit ingress web-ingress 
+kubectl get ingress web-ingress 
+kubectl edit ingress web-ingress 
+kubectl get pods -n ingress-nginx
+kubectl exec -it ingress-nginx-controller-5794f5c579-6vrlx
+kubectl exec -it ingress-nginx-controller-5794f5c579-6vrlx -n ingress-nginx 
+kubectl exec -it ingress-nginx-controller-5794f5c579-6vrlx -n ingress-nginx -- bash
+vi volume-pod.yaml
+mv  volume-pod.yaml volume-pod1.yaml 
+mv  volume-pod.yaml volume-pod2.yaml 
+mv  volume-pod1.yaml volume-pod2.yaml 
+vi volume-pod2.yaml
+rm volume-pod2.yaml 
+vi volume-deploy.yaml
+kubectl apply -f volume-deploy.yaml
+vi volume-deploy.yaml
+kubectl apply -f volume-deploy.yaml
+kubectl replace -f volume-deploy.yaml 
+kubectl get deploy,pod
+vi volume-deploy.yaml 
+kubectl replace -f volume-deploy.yaml 
+kubectl delete deployments.apps nginx-deployment 
+kubectl apply -f volume-deploy.yaml
+kubectl get pods -o wide
+kubectl expose deployment volume-deploy --name volume-svc --port 80
+kubectl edit svc volume-svc 
+kubectl delete svc volume-svc 
+kubectl expose deployment volume-deploy --name volume-svc --port 80 --type NodePort
+kubectl edit svc volume-svc 
+kubectl get svc
+vi volume-deploy.yaml 
+kubectl replace -f volume-deploy.yaml
+vi volume-deploy.yaml 
+kubectl get pods
+kubectl get pods -o wide
+curl http://10.0.2.25
+curl http://10.0.2.25:80
+curl http://10.0.1.1
+kubectl get svc,ep,pod
+kubectl delete deployments.apps  volume-deploy 
+kubectl apply -f volume-deploy.yaml 
+kubectl exec -it volume-deploy-5d58f5f6bc-mld8m -- bash
+kubectl exec -it volume-deploy-5d58f5f6bc-blt66 -- bash
+vi test-pv.yaml
+kubectl get sc
+vi test-pvc.yaml
+vi test-pv.yaml
+vi test-pvc.yaml
+kubectl apply -f test-pv.yaml 
+kubectl get pv
+kubectl get pv,pvc
+kubectl delete pvc www-web-0 
+kubectl get pv,pvc
+kubectl apply -f test-pvc.yaml 
+kubectl get pv,pvc
+vi persistent-pod.yaml
+kubectl apply -f persistent-pod.yaml
+kubectl get pod -o wide
+vi test-pv
+vi test-pv.yaml 
+sudo apt install nfs-common nfs-kernel-server cifs-utils -y
+mkdir /var/nfs/data1
+mkdir /var/nfs/data1 -p
+sudo mkdir /var/nfs/data1 -p
+sudo chmod 777 /var/nfs/data1
+ls -la /var/nfs/data1
+sudo vi /etc/exports 
+sudo exportfs -rav
+systemctl restart nfs-server.service 
+sudo systemctl restart nfs-server.service 
+vi nfs-sc.yaml
+kubectl apply -f nfs-sc.yaml
+vi nfs-pv.yaml
+cp -rp test-pv.yaml nfs-pv.yaml
+vi nfs-pv.yaml
+kubectl get sc
+vi nfs-sc.yaml 
+kubectl apply -f nfs-sc.yaml
+vi nfs-sc.yaml 
+kubectl apply -f nfs-sc.yaml
+kubectl  get sc
+kubectl get pv
+kubectl apply -f nfs-
+kubectl apply -f nfs-pv.yaml 
+kubectl get pv
+cp test-pvc.yaml nfs-pvc.yaml
+vi nfs-pvc.yaml
+kubectl apply -f nfs-pvc.yaml
+kubectl get pv,pvc
+kubectl edit pvc nfs-pvc 
+kubectl delete pvc test-pvc 
+kubectl edit pvc nfs-pvc 
+kubectl get pv,pvc
+kubectl delete pvc nfs-pvc 
+kubectl get pv,pvc
+kubectl get pod persistent-pod 
+kubectl delete pod persistent-pod 
+kubectl get pv,pvc
+kubectl apply -f test-pvc.yaml 
+kubectl apply -f persistent-pod.yaml 
+kubectl  get pv,pvc
+kubectl get pv test-pv -o yaml
+kubectl patch pv test-pv -p '{"spec":{"claimRef": null }}'
+kubectl  get pv,pvc
+kubectl apply -f  persistent-pod.yaml 
+kubectl delete pvc test-pvc 
+kubectl  get pv,pvc
+kubectl edit pvc test-pvc 
+kubectl  get pv,pvc
+kubectl delete pod persistent-pod 
+kubectl delete pod pv test-pv
+kubectl  get pv,pvc
+kubectl delete pv test-pv
+kubectl  get pv,pvc
+vi nfs-pvc.yaml 
+kubectl apply -f nfs-pvc.yaml
+kubectl  get pv,pvc
+cp -rp persistent-pod.yaml nfs-pod.yaml
+vi nfs-pod.yaml
+kubectl apply -f nfs-pod.yaml
+kubectl get pods
+kubectl get pods -o wide
+vi /var/nfs/data1/index.html
+ls -la /var/nfs/data1/index.html
+sudo chmod -R 777 /var/nfs/data1/
+cd /tmp
+git clone https://github.com/kubernetes-sigs/nfs-ganesha-server-and-external-provisioner.git
+kubectl create -f deploy/kubernetes/deployment.yaml 
+cd nfs-ganesha-server-and-external-provisioner/
+kubectl create -f deploy/kubernetes/deployment.yaml -f deploy/kubernetes/rbac.yaml 
+kubectl get pod
+vi deploy/kubernetes/class.yaml 
+kubectl apply -f deploy/kubernetes/class.yaml
+kubectl get sc
+cd
+cd k8s-adm_Aug/day3
+kubectl get pv,pvc
+cp nfs-pvc.yaml nfs-dynamic-pvc.yaml
+vi nfs-dynamic-pvc.yaml
+kubectl apply -f nfs-dynamic-pvc.yaml
+kubectl get pv,pvc
+kubectl delete pvc nfs-dynamic-pvc 
+kubectl get pv,pvc
+cat test-pvc
+cat test-pvc.yaml 
+ls
+cat nfs-pod.yaml]
+cat nfs-pod.yaml
+kubectl get pods
+kubectl get sc
+kubectl get sc nfs-class -o yaml
+kubectl get pv,pvc
+vi test-pvc.yaml 
+vi nfs-dynamic-pvc.yaml 
+kubectl apply -f nfs-dynamic-pvc.yaml
+kubectl get pv,pvc
+history
+history | awk '$1 > 381' | cut -c 8- > ../day3-history.txt

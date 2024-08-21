@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: fake2-rs-pod
+  labels:
+    app: myapp
+spec:
+  containers:
+  - name: c1
+    image: nginx:1.14.2
