@@ -1,0 +1,3 @@
+# this is app1 config
+COUNTER=0
+PATH=/var/app/srv

@@ -1,0 +1,367 @@
+vi my-configmap.yaml
+kubectl apply -f my-configmap.yaml
+vi env-example
+vi services.json
+kubectl create configmap app1-config --from-env-file env-example 
+kubectl create cm services --from-file services.json 
+kubectl get cm
+kubectl describe cm my-configmap
+kubectl describe service
+kubectl describe services
+kubectl get cm
+kubectl describe cm services
+kubectl describe cm app1-config 
+kubectl create cm my-map2 --from-literal username=root --from-literal password=SecurePass
+kubectl get cm my-map2 
+kubectl describe cm my-map2 
+kubectl delete cm my-map2 
+kubectl edit cm my-configmap 
+kubectl describe cm my-configmap 
+kubectl run configmap-pod --image nginx -o yaml --dryrun=client > configmap-pod.yaml
+kubectl run configmap-pod --image nginx -o yaml --dry-run=client > configmap-pod.yaml
+vi configmap-pod.yaml
+kubectl apply -f configmap-pod.yaml
+kubectl exec -it configmap-pod -- bash
+kubectl get pods
+vi configmap-pod.yaml
+kubectl events
+kubectl logs configmap-pod 
+vi configmap-pod.yaml
+kubectl replace -f configmap-pod.yaml
+vi configmap-pod.yaml
+kubectl replace -f configmap-pod.yaml
+q
+kubectl delete pod configmap-pod 
+kubectl replace -f configmap-pod.yaml
+kubectl apply -f configmap-pod.yaml 
+kubectl  get pod
+ping wp.pl
+kubectl  get pod
+kubectl  get pv,pvc
+kubectl get pods
+kubectl describe pod configmap-pod
+kubectl edit cm app1-config 
+kubectl replace -f configmap-pod.yaml
+q
+kubectl replace -f configmap-pod.yaml
+kubectl delete pod configmap-pod 
+kubectl apply -f configmap-pod.yaml 
+kubectl get pods
+kubectl exec -it configmap-pod -- bash
+kubectl exec -it configmap-pod -- sh env
+kubectl exec -it configmap-pod -- sh 
+cp -rp configmap-pod.yaml configmap-volume-pod.yaml 
+vi configmap-volume-pod.yaml
+kubectl apply -f configmap-volume-pod.yaml
+kubectl exec -it configmap-volume-pod -- sh
+kubectl edit cm my-configmap 
+kubectl exec -it configmap-volume-pod -- sh
+kubectl create secret generic my-secret --from-literal user=root --from-literal pass=SecurePassword123
+kubectl describe secrets my-secret 
+kubectl get secrets my-secret -o yaml
+echo 'U2VjdXJlUGFzc3dvcmQxMjM=' | base64 -d 
+echo 'U2VjdXJlUGFzc3dvcmQxMjM=' | base64 -d & echo
+echo 'U2VjdXJlUGFzc3dvcmQxMjM=' | base64 -d | echo
+echo 'U2VjdXJlUGFzc3dvcmQxMjM=' | base64 -d ; echo
+vi mariaDB
+kubectl create secret generic --from-file mariaDB 
+kubectl create secret generic mariadb-secret --from-file mariaDB 
+kubectl get secrets mariadb-secret -o yaml
+echo 'dXNlcm5hbWU9ZGJfYWRtaW4KcGFzc3dvcmQ9UGFzczEyMwo='| base64 -d 
+echo "hasloBezpieczne" | base64
+kubectl edit secrets mariadb-secret 
+kubectl get secrets mariadb-secret -o yaml
+echo "aGFzbG9CZXpwaWVjem5lCg==" | base64 -d ; echo
+htpasswd -c .htpasswd mariola
+sudo apt install apache2-utils
+htpasswd -c .htpasswd mariola
+ls -al
+cat .htpasswd
+kubectl create secret generic nginx-htpasswd --from-file .htpasswd 
+rm .htpasswd
+vi nginx-config.yaml
+kubectl apply -f nginx-config.yaml
+vi nginx-pod.yaml
+kubectl apply -f nginx-pod.yaml
+kubectl get pods
+kubectl get pods -o wide
+kubectl expose pod nginx-pod --type NodePort --port 80 --name nginx-pod-svc
+kubectl edit pod nginx-pod 
+kubectl expose pod nginx-pod --type NodePort --port 80 --name nginx-pod-svc
+kubectl get svc
+curl http://192.168.1.100:32748 
+curl http://192.168.1.100:32748 -u mariola:mariola
+kubectl get nodes --show-labels 
+kubectl describe nodes worker01
+kubectl get pods
+ls -la
+cp -rp configmap-pod.yaml nodename-pod.ymal
+mv nodename-pod.ymal nodename-pod.yaml
+vi nodename-pod.yaml
+kubectl apply -f nodename-pod.yaml
+kubectl get pod -o wide
+kubectl get pod -o wide | grep worker01 | wc -l
+kubectl get pod -o wide | grep worker02 | wc -l
+kubectl delete -f nodename-pod.yaml
+vi nodename-pod.yaml 
+kubectl get pod -o wide | grep worker01 | wc -l
+kubectl get pod -o wide | grep worker02 | wc -l
+kubectl apply -f nodename-pod.yaml
+kubectl get pod -o wide
+cp -rp nodename-pod.yaml nodeselector-pod.yaml 
+vi nodeselector-pod.yaml
+kubectl apply -f nodeselector-pod.yaml
+vi nodeselector-pod.yaml
+kubectl apply -f nodeselector-pod.yaml
+kubectl get pods
+kubectl events
+kubectl label node worker02 mylabel=myvalue
+kubectl events
+kubectl get pods
+kubectl get pods -o wide
+kubectl taint node worker01 env=prod:NoSchedule
+kubectl describe nodes worker1 | head
+kubectl describe nodes worker01 | head
+kubectl describe nodes worker01 | head -14
+kubectl get pods
+vi schedule-pod.yaml
+kubectl apply -f schedule-pod.yaml
+kubectl get pods -o wide
+kubectl get pods -o wide| grep worker02 |wc -l
+kubectl get pods -o wide| grep worker01 |wc -l
+cp -rp schedule-pod.yaml taint-pod.yaml
+vi taint-pod.yaml
+kubectl apply -f taint-pod.yaml
+kubectl get pods -o wide
+vi taint-pod.yaml 
+kubectl apply -f taint-pod.yaml
+kubectl describe pod taint-pod 
+kubectl get pods
+kubectl get pods -o wide
+kubectl taint node worker01 testing=true:NoExecute
+kubectl get pods -o wide
+watch -n1 kubectl get pods -o wide
+kubectl taint node worker01 testing-
+kubectl taint node worker01 env-
+kubectl get pods -o wide
+kubectl label node worker01 country=poland 
+kubectl label node worker02 country=france
+kubectl get nodes --show-labels 
+kubectl label node worker01 country-
+kubectl label node worker02 country
+kubectl label node worker02 country-
+kubectl label node worker01 kubernetes.io/country=poland 
+kubectl label node worker02 kubernetes.io/country=france 
+kubectl get nodes --show-labels 
+kubectl label node worker02 mylabel-
+kubectl label node worker01 kubernetes.io/env=production
+vi with-node-affinity.yaml
+kubectl get pods
+kubectl get pods -o wide
+kubectl label node worker01 kubernetes.io/env-
+kubectl label node worker02 kubernetes.io/env=production
+kubectl get nod --show-labels 
+kubectl get node --show-labels 
+kubectl apply -f with-node-affinity.yaml 
+kubectl get pods -o wide
+cp -rp with-node-affinity.yaml with-node-affinity2.yaml 
+vi with-node-affinity2.yaml
+kubectl apply -f with-node-affinity2.yaml
+kubectl get pods -o wide
+vi with-node-affinity2.yaml
+vi with-pod-affinity.yaml
+kubectl get pods --show-labels 
+vi with-pod-affinity.yaml
+kubectl edit pod schedule-pod 
+vi with-pod-affinity.yaml
+kubectl apply -f with-pod-affinity.yaml
+kubectl get pods -o wide
+cp -rp with-pod-affinity.yaml with-pod-anti-affinity.yaml 
+vi with-pod-anti-affinity.yaml
+kubectl apply -f with-pod-anti-affinity.yaml
+kubectl get pods -o wide
+kubectl create ns test-ns
+kubectl describe ns test-ns 
+kubectl get pods
+kubectl delete all all
+kubectl delete all -A
+kubectl delete all --all
+kubectl get pv,pvc
+kubectl delete pvc nfs-pvc nfs-dynamic-pvc 
+kubectl delete pv nfs-pv pvc-658abec4-a44b-488a-b62a-796a0d2afd20 
+kubectl get pv,pvc
+vi security-pod1.yaml
+kubectl apply -f security-pod1.yaml
+kubectl get po
+cp security-pod1.yaml security-pod2.yaml 
+vi security-pod2.yaml
+kubectl apply -f security-pod2.yaml
+vi security-pod2.yaml
+kubectl describe nodes worker01
+kubectl describe nodes worker02
+kubectl events
+vi security-pod2.yaml
+kubectl apply -f security-pod2.yaml
+kubectl get pods
+kubectl exec -it security-pod2 -- sh
+cp security-pod1.yaml security-pod3.yaml 
+vi security-pod3.yaml
+kubectl apply -f security-pod3.yaml
+kubectl exec -it security-pod3 -- bash
+kubectl exec -it security-pod3 -- sh
+kubectl get pods
+vi security-pod3.yaml
+kubectl apply -f security-pod3.yaml
+kubectl delete pod security-pod3
+kubectl apply -f security-pod3.yaml
+kubectl exec -it security-pod3 -- bash
+kubectl exec -it security-pod3 -- sh
+cat with-pod-a*
+kubectl get pods
+kubectl delete pod security-pod1
+kubectl get pods
+kubectl create ns np-test
+kubectl get ns
+kubectl get ns np-test --show-labels 
+vi np-nginx.yaml
+kubectl apply -f np-nginx.yaml
+kubectl get pods -n np-test 
+vi np-busybox.yaml
+kubectl apply -f np-busybox.yaml
+kubectl get pods -n np-test 
+kubectl get pods -n np-test -o wide
+kubectl -n np-test exec np-busybox -- curl 10.0.1.247 
+kubectl -n np-test exec np-nginx -- curl 10.0.1.131
+kubectl -n np-test exec np-nginx -- curl -v telnet://10.0.1.131:22
+kubectl -n np-test exec np-busybox -- curl 10.0.1.247 
+vi my-networkpolicy.yaml
+vi np-busybox.yaml
+vi np-nginx.yaml 
+vi my-networkpolicy.yaml
+kubectl apply -f my-networkpolicy.yaml
+kubectl describe networkpolicies.networking.k8s.io -n np-test my-networkpolicy 
+kubectl -n np-test exec np-busybox -- curl 10.0.1.247 
+vi my-networkpolicy.yaml
+kubectl apply -f my-networkpolicy.yaml
+kubectl describe networkpolicies.networking.k8s.io -n np-test my-networkpolicy 
+kubectl -n np-test exec np-busybox -- curl 10.0.1.247 
+kubectl -n np-test exec np-nginx -- bash
+kubectl -n np-test exec -it np-nginx -- bash
+vi my-networkpolicy.yaml
+kubectl apply -f my-networkpolicy.yaml
+kubectl describe networkpolicies.networking.k8s.io -n np-test my-networkpolicy 
+kubectl -n np-test exec -it np-nginx -- bash
+kubectl apply -f my-networkpolicy.yaml
+vi my-networkpolicy.yaml
+kubectl apply -f my-networkpolicy.yaml
+kubectl -n np-test exec -it np-nginx -- bash
+kubectl apply -f ../day2/*
+kubectl top
+kubectl top node
+wget https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+vi components.yaml
+kubectl apply -f components.yaml 
+watch -n1 kubectl get pods -A
+kubectl top node
+vi hpa-deployment.yaml
+kubectl apply -f hpa-deployment.yaml
+kubectl get pods
+kubectl autoscale deployment hpa-deployment --cpu-percent 60 --min 2 --max 10
+kubectl get hpa
+kubectl get pods
+kubectl get hpa
+kubectl run -i --tty load-generator --rm --image=busybox:1.28 --restart=Never -- /bin/sh -c "while sleep 0.01; do wget -q -O- http://php-apache; done"
+kubectl get hpa
+kubectl get pods
+kubectl get pod load-generator -o yaml
+kubectl get pod load-generator -o yaml > load-generator.yaml
+vi load-generator.yaml
+kubectl apply -f load-generator.yaml
+vi load-generator.yaml
+kubectl apply -f load-generator.yaml
+kubectl get hpa
+kubectl top pods
+kubectl get hpa
+kubectl top pods
+kubectl get hpa
+kubectl top pods
+kubectl delete deployments.apps load-generator 
+kubectl get hpa
+kubectl top pods
+kubectl get hpa
+sudo journalctl -u kubelet
+sudo journalctl -u kubelet -p err
+sudo journalctl -u containerd
+sudo journalctl -u containerd -p err
+cd /var/log/
+ls -la
+cd pods/
+sudo cd pods/
+sudo -i
+cd 
+cd k8s-adm_Aug/day4
+kubectl logs hpa-deployment-d87b7ff46-4qzkq 
+kubectl logs load-generator 
+kubectl events
+kubectl events -A
+kubectl get events --sort-by=.metadata.creationTimestamp
+kubectl get services --sort-by=.metadata.name
+kubectl get pods --sort-by=.metadata.name
+kubectl top pods --help
+kubectl top pods --sort-by=mem\
+kubectl top pods --sort-by=mem
+kubectl top pods --sort-by=memory
+kubectl top pods
+kubectl top pods --containers 
+kubectl apply -f ../day2/sidecar-pod.yaml 
+kubectl top pods
+kubectl get pods
+kubectl top pods
+kubectl top pods --containers 
+vi /var/lib/kubelet/config.yaml 
+systemctl status kubelet
+vi /usr/lib/systemd/system/kubelet.service.d/10-kubeadm.conf 
+kubectl logs sidecar-pod 
+kubectl logs sidecar-pod -c sidecar
+kubectl logs sidecar-pod --all-containers 
+kubectl run my-pod --image=registry.k8s.io/pause:3.1
+kubectl get pods
+kubectl delete pod load-generator
+kubectl get pods
+kubectl exec -it my-pod -- sh
+kubectl exec -it my-pod -- bash
+kubectl exec -it my-pod -- 
+kubectl exec -it my-pod -- ls
+kubectl debug -it my-pod --image=nicolaka/netshoot --target=my-pod
+kubectl debug -it my-pod --image=busyboxplus:curl --target=my-pod
+kubectl debug -it my-pod --image=radial/busyboxplus:curl --target=my-pod
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
+watch -n1 kubectl get pods -n kubernetes-dashboard
+kubectl get all -n kubernetes-dashboard
+kubectl edit svc -n kubernetes-dashboard kubernetes-dashboard 
+watch -n1 kubectl get pods -n kubernetes-dashboard
+kubectl get all -n kubernetes-dashboard
+kubectl edit svc -n kubernetes-dashboard kubernetes-dashboard 
+kubectl get all -n kubernetes-dashboard
+kubectl edit ingress web-ingress 
+cp -rp ../day3/web-ingress.yaml dashboard-ingress.yaml
+vi dashboard-ingress.yaml
+kubectl apply -f dashboard-ingress.yaml
+kubectl get ingress -n kubernetes-dashboard 
+vi dashboard-ingress.yaml
+kubectl apply -f dashboard-ingress.yaml
+vi dashboard-ingress.yaml
+kubectl apply -f dashboard-ingress.yaml
+kubectl get sa -n kubernetes-dashboard 
+kubectl get sa -n kubernetes-dashboard kubernetes-dashboard
+kubectl get sa -n kubernetes-dashboard kubernetes-dashboard -o yaml
+kubectl get clusterrole
+kubectl get clusterrolebinding -n kubernetes-dashboard 
+kubectl create clusterrolebinding dashboard-admin-binding --help
+kubectl create clusterrolebinding dashboard-admin-binding --clusterrole=cluster-admin --serviceaccount=kubernetes-dashboard:kubernetes-dashboard
+kubectl create token -n kubernetes-dashboard kubernetes-dashboard 
+kubectl get deploy
+kubectl get pods
+kubectl edit deployments.apps dashboard-deploy 
+history
+history | awk '$1 > 663' | cut -c 8- > ../day4-history.txt
